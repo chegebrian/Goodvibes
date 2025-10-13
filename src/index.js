@@ -1,10 +1,9 @@
-require("dotenv").config();
-
-const clientID = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
+const clientID = import.meta.env.VITE_CLIENT_ID;
+const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 const tokenEndpointUrl = "https://accounts.spotify.com/api/token";
 const artistEndpointUrl = "https://api.spotify.com/v1/artists";
 const searchEndpointUrl = "https://api.spotify.com/v1/search";
+const formEl = document.querySelector("form");
 
 // const id = 5HmoSRJDslP21IjvUSWZKx
 
@@ -29,13 +28,13 @@ async function fetchAccessToken() {
   }
 }
 
-async function fetchArtistId() {
-  // const userInput = document.querySelector("#search").value;
-  const userInput = "drake";
+async function fetchArtistId(userInput) {
   const accessToken = await fetchAccessToken();
   try {
     const response = await fetch(
-      `${searchEndpointUrl}?q=${encodeURIComponent(userInput)}&type=artist`,
+      `${searchEndpointUrl}?q=${encodeURIComponent(
+        userInput
+      )}&type=artist,album,track,playlist,`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -43,29 +42,38 @@ async function fetchArtistId() {
       }
     );
     const data = await response.json();
-    console.log(data.artists.items[0]);
+    console.log(data);
   } catch (error) {
     console.error(error);
   }
 }
 
-fetchArtistId();
+// fetchArtistId();
 
-async function fetchArtist() {
-  const accessToken = await fetchAccessToken();
+formEl.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const userInput = e.target.search.value;
+  // console.log(userInput);
 
-  try {
-    const response = await fetch(
-      `${artistEndpointUrl}/5HmoSRJDslP21IjvUSWZKx`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    const data = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
-}
-fetchArtist();
+  await fetchArtistId(userInput);
+});
+
+// async function fetchArtist() {
+//   const accessToken = await fetchAccessToken();
+
+//   try {
+//     const response = await fetch(
+//       `${artistEndpointUrl}/5HmoSRJDslP21IjvUSWZKx`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       }
+//     );
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+// fetchArtist();

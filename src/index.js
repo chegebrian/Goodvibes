@@ -3,9 +3,12 @@ const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 const tokenEndpointUrl = "https://accounts.spotify.com/api/token";
 const artistEndpointUrl = "https://api.spotify.com/v1/artists";
 const searchEndpointUrl = "https://api.spotify.com/v1/search";
+
 const formEl = document.querySelector("form");
 
 // const id = 5HmoSRJDslP21IjvUSWZKx
+
+// function to get our access token for authorization
 
 async function fetchAccessToken() {
   try {
@@ -28,13 +31,13 @@ async function fetchAccessToken() {
   }
 }
 
-async function fetchArtistId(userInput) {
+async function fetchArtist(userInput) {
+  userInput = "nina simone";
+
   const accessToken = await fetchAccessToken();
   try {
     const response = await fetch(
-      `${searchEndpointUrl}?q=${encodeURIComponent(
-        userInput
-      )}&type=artist,album,track,playlist,`,
+      `${searchEndpointUrl}?q=${encodeURIComponent(userInput)}&type=artist`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -42,7 +45,8 @@ async function fetchArtistId(userInput) {
       }
     );
     const data = await response.json();
-    console.log(data);
+    console.log(data.artists.items[0]);
+    return data.artists.items[0];
   } catch (error) {
     console.error(error);
   }
@@ -52,10 +56,10 @@ async function fetchArtistId(userInput) {
 
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const userInput = e.target.search.value;
+  let userInput = e.target.search.value;
   // console.log(userInput);
 
-  await fetchArtistId(userInput);
+  await fetchArtist(userInput);
 });
 
 // async function fetchArtist() {
@@ -77,3 +81,6 @@ formEl.addEventListener("submit", async (e) => {
 //   }
 // }
 // fetchArtist();
+
+// type=artist,album,track,playlist,
+

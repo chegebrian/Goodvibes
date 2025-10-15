@@ -5,6 +5,9 @@ const artistEndpointUrl = "https://api.spotify.com/v1/artists";
 const searchEndpointUrl = "https://api.spotify.com/v1/search";
 
 const formEl = document.querySelector("form");
+const sectionEl = document.querySelector("section");
+
+const formatter = new Intl.NumberFormat("en-US");
 
 // const id = 5HmoSRJDslP21IjvUSWZKx
 
@@ -32,8 +35,8 @@ async function fetchAccessToken() {
 }
 
 async function fetchArtist(userInput) {
-  userInput = "nina simone";
-
+  // userInput = "nina simone";
+  if (!userInput) return;
   const accessToken = await fetchAccessToken();
   try {
     const response = await fetch(
@@ -44,9 +47,9 @@ async function fetchArtist(userInput) {
         },
       }
     );
-    const data = await response.json();
-    console.log(data.artists.items[0]);
-    return data.artists.items[0];
+    const artist = await response.json();
+    console.log(artist);
+    displayArtist(artist.artists.items[0]);
   } catch (error) {
     console.error(error);
   }
@@ -57,30 +60,25 @@ async function fetchArtist(userInput) {
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
   let userInput = e.target.search.value;
-  // console.log(userInput);
+  console.log(userInput);
 
   await fetchArtist(userInput);
 });
 
-// async function fetchArtist() {
-//   const accessToken = await fetchAccessToken();
-
-//   try {
-//     const response = await fetch(
-//       `${artistEndpointUrl}/5HmoSRJDslP21IjvUSWZKx`,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${accessToken}`,
-//         },
-//       }
-//     );
-//     const data = await response.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-// fetchArtist();
-
-// type=artist,album,track,playlist,
-
+async function displayArtist(artist) {
+  // const artist = await fetchArtist();
+  console.log(artist);
+  sectionEl.innerHTML = `
+      <div>
+      <img src=${artist.images[0].url} alt=${artist.name} width="320px">
+      <div>
+        <span></span>
+        <h3>${artist.name}</h3>
+        <p>${formatter.format(artist.followers.total)} monthly listeners</p>
+            <ul>
+   ${artist.genres.map((genre) => `<li>${genre}</li>`).join("")}
+    </ul>
+      </div>
+    </div>
+  `;
+}

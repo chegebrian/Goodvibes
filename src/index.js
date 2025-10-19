@@ -3,6 +3,7 @@ const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 const tokenEndpointUrl = "https://accounts.spotify.com/api/token";
 const artistEndpointUrl = "https://api.spotify.com/v1/artists";
 const searchEndpointUrl = "https://api.spotify.com/v1/search";
+const trackEndpointUrl = "https://api.spotify.com/v1/tracks";
 
 const formEl = document.querySelector("form");
 const sectionEl = document.querySelector("section");
@@ -40,7 +41,9 @@ async function fetchArtist(userInput) {
   const accessToken = await fetchAccessToken();
   try {
     const response = await fetch(
-      `${searchEndpointUrl}?q=${encodeURIComponent(userInput)}&type=artist`,
+      `${searchEndpointUrl}?q=${encodeURIComponent(
+        userInput
+      )}&type=artist,track`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -49,7 +52,7 @@ async function fetchArtist(userInput) {
     );
     const artist = await response.json();
     console.log(artist);
-    displayArtist(artist.artists.items[0]);
+    displayArtist(artist.artists.items);
   } catch (error) {
     console.error(error);
   }
@@ -65,12 +68,15 @@ formEl.addEventListener("submit", async (e) => {
   await fetchArtist(userInput);
 });
 
-async function displayArtist(artist) {
-  // const artist = await fetchArtist();
-  console.log(artist);
-  sectionEl.innerHTML = `
-      <div>
-      <img src=${artist.images[0].url} alt=${artist.name} width="320px">
+async function displayArtist(artists) {
+  console.log(artists);
+
+  try {
+    const arrayofArtists = artists
+      .map(
+        (artist) => `
+      <div class="artist-card" data-id="${artist.id}">
+      <img src=${artist.images[0]?.url} alt=${artist.name} width="320px">
       <div>
         <span></span>
         <h3>${artist.name}</h3>
@@ -80,5 +86,42 @@ async function displayArtist(artist) {
     </ul>
       </div>
     </div>
-  `;
+  `
+      )
+      .join("");
+
+    sectionEl.innerHTML = arrayofArtists;
+
+    document.querySelectorAll(".artist-card").forEach((artistCard) =>
+      artistCard.addEventListener("click", () => {
+        fetchSpecificArtist(artistCard.dataset.id);
+      })
+    );
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function fetchSpecificArtist(id) {
+  console.log(id);
+  console.log("hurray i was clicked");
+  console.log(`${artistEndpointUrl}/${id}`);
+
+  const accessToken = await fetchAccessToken();
+  try {
+    const response = await fetch(`${artistEndpointUrl}/${id}/top-tracks`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    displayArtistSongs(data.tracks);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function displayArtistSongs(songs) {
+  console.log(songs);
 }

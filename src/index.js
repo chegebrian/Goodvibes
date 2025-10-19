@@ -6,11 +6,10 @@ const searchEndpointUrl = "https://api.spotify.com/v1/search";
 const trackEndpointUrl = "https://api.spotify.com/v1/tracks";
 
 const formEl = document.querySelector("form");
-const sectionEl = document.querySelector("section");
+const artistsSectionEl = document.querySelector("#artists-section");
+const songsSectionEl = document.querySelector("#songs-section");
 
 const formatter = new Intl.NumberFormat("en-US");
-
-// const id = 5HmoSRJDslP21IjvUSWZKx
 
 // function to get our access token for authorization
 
@@ -58,8 +57,6 @@ async function fetchArtist(userInput) {
   }
 }
 
-// fetchArtistId();
-
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
   let userInput = e.target.search.value;
@@ -90,7 +87,7 @@ async function displayArtist(artists) {
       )
       .join("");
 
-    sectionEl.innerHTML = arrayofArtists;
+    artistsSectionEl.innerHTML = arrayofArtists;
 
     document.querySelectorAll(".artist-card").forEach((artistCard) =>
       artistCard.addEventListener("click", () => {
@@ -103,10 +100,6 @@ async function displayArtist(artists) {
 }
 
 async function fetchSpecificArtist(id) {
-  console.log(id);
-  console.log("hurray i was clicked");
-  console.log(`${artistEndpointUrl}/${id}`);
-
   const accessToken = await fetchAccessToken();
   try {
     const response = await fetch(`${artistEndpointUrl}/${id}/top-tracks`, {
@@ -115,7 +108,6 @@ async function fetchSpecificArtist(id) {
       },
     });
     const data = await response.json();
-    console.log(data);
     displayArtistSongs(data.tracks);
   } catch (error) {
     console.error(error);
@@ -124,4 +116,15 @@ async function fetchSpecificArtist(id) {
 
 async function displayArtistSongs(songs) {
   console.log(songs);
+  const topTracks = songs.map(
+    (song) => `
+<div>
+<h3>${song.name}</h3>
+<span>${song.artists.map((artist) => artist.name).join("")}</span>
+</div>
+
+`
+  ).join("");
+
+  songsSectionEl.innerHTML = topTracks;
 }

@@ -7,9 +7,21 @@
     <script type="module" src="./src/index.js" defer></script>
     <title>goodvibes</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       main {
+        width: fit-content;
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
+        gap: 1em;
+      }
+
+      #artists-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 1em;
       }
     </style>
@@ -36,5 +48,7 @@
       <section id="songs-section"></section>
     </main>
     <footer></footer>
+    <!-- Add the iFrame API script tag -->
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
   </body>
 </html>

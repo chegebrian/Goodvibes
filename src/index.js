@@ -73,7 +73,7 @@ async function displayArtist(artists) {
       .map(
         (artist) => `
       <div class="artist-card" data-id="${artist.id}">
-      <img src=${artist.images[0]?.url} alt=${artist.name} width="320px">
+      <img src=${artist.images[0]?.url} alt=${artist.name} width="160px">
       <div>
         <span></span>
         <h3>${artist.name}</h3>
@@ -116,15 +116,17 @@ async function fetchSpecificArtist(id) {
 
 async function displayArtistSongs(songs) {
   console.log(songs);
-  const topTracks = songs.map(
-    (song) => `
+  const topTracks = songs
+    .map(
+      (song) => `
 <div>
 <h3>${song.name}</h3>
 <span>${song.artists.map((artist) => artist.name).join(", ")}</span>
 </div>
 
 `
-  ).join("");
+    )
+    .join("");
 
   songsSectionEl.innerHTML = topTracks;
 }

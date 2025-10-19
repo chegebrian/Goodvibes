@@ -120,7 +120,7 @@ async function displayArtistSongs(songs) {
     (song) => `
 <div>
 <h3>${song.name}</h3>
-<span>${song.artists.map((artist) => artist.name).join("")}</span>
+<span>${song.artists.map((artist) => artist.name).join(", ")}</span>
 </div>
 
 `

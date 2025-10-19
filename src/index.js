@@ -130,3 +130,11 @@ async function displayArtistSongs(songs) {
 
   songsSectionEl.innerHTML = topTracks;
 }
+
+// spotify iframe Api
+
+// This signals to your app that it is now safe to rely on the methods of the iFrame API.
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  //
+};
+

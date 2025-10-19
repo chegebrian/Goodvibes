@@ -13,10 +13,23 @@
         padding: 0;
         box-sizing: border-box;
       }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      header img {
+        width: 3rem;
+      }
       main {
         width: fit-content;
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
+        gap: 1em;
+      }
+      #songs-section {
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 1em;
       }
 
@@ -28,7 +41,10 @@
     </style>
   </head>
   <body>
-    <header></header>
+    <header>
+      <img src="./public/images/headphones-solid-full.svg" alt="headphones" />
+      <h1>GoodVibes</h1>
+    </header>
     <main>
       <section id="search-section">
         <form action="">

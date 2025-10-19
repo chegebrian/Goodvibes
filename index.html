@@ -53,9 +53,10 @@
       main {
         /* width: fit-content; */
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr 3fr;
         gap: 1em;
       }
+
       #songs-section {
         display: grid;
         grid-template-columns: 1fr;
@@ -64,7 +65,7 @@
 
       #artists-section {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 1em;
       }
     </style>
@@ -75,7 +76,11 @@
       <h1>GoodVibes</h1>
     </header>
     <main>
-      <section id="search-section">
+      <section>
+        <h2>Top Tracks</h2>
+        <div id="songs-section"></div>
+      </section>
+      <section>
         <form action="">
           <div class="input">
             <input
@@ -88,9 +93,8 @@
             <button type="submit">Search</button>
           </div>
         </form>
-        <section id="songs-section"></section>
+        <div id="artists-section"></div>
       </section>
-      <section id="artists-section"></section>
     </main>
     <footer>
       <section id="iframe-section">

@@ -72,13 +72,14 @@ async function displayArtist(artists) {
     const arrayofArtists = artists
       .map(
         (artist) => `
-      <div class="artist-card" data-id="${artist.id}">
-      <img src=${artist.images[0]?.url} alt=${artist.name} width="160px">
+      <div class="artist-card" data-id="${artist.id}" width="160px">
+      <img src=${artist.images[0]?.url} alt=${artist.name} width="100%">
       <div>
         <span></span>
         <h3>${artist.name}</h3>
         <p>${formatter.format(artist.followers.total)} monthly listeners</p>
             <ul>
+            <h4>Genre</h4>
    ${artist.genres.map((genre) => `<li>${genre}</li>`).join("")}
     </ul>
       </div>

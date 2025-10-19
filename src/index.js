@@ -141,6 +141,7 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   const element = document.getElementById("embed-iframe");
   const options = {
     // default track
+    height: "200px",
     uri: "spotify:track:7H7hgeZJkbpWTpxuAqzhv1",
   };
   const callback = (controller) => {

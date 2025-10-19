@@ -5,6 +5,7 @@ body {
   font-family: "Poppins", "Inter", sans-serif;
   background-color: #121212;
   color: #fff;
+  height: 100vh;
 }
 
 ul li {
@@ -22,4 +23,25 @@ ul li {
 
 .artist-card img {
   border-radius: 0.5rem;
+}
+
+/* | Purpose                         | Color         | Hex       | Notes                                               |
+| ------------------------------- | ------------- | --------- | --------------------------------------------------- |
+| **Primary brand color**         | Spotify Green | `#1DB954` | Used for highlights, active links, and play buttons |
+| **Background (main)**           | Jet Black     | `#121212` | Primary app background (Spotify-style dark theme)   |
+| **Sidebar background**          | Pure Black    | `#000000` | Provides contrast for logo and nav links            |
+| **Card / Section background**   | Charcoal      | `#181818` | For song cards and "Now Playing" section            |
+| **Hover / Active color**        | Graphite Gray | `#282828` | Used when hovering over songs or nav items          |
+| **Primary text**                | White         | `#FFFFFF` | Main text color                                     |
+| **Secondary text**              | Muted Gray    | `#B3B3B3` | Artist names, descriptions, secondary info          |
+| **Border / Divider (optional)** | Soft Gray     | `#2A2A2A` | Subtle separators between UI areas                  | */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 155px; /* adjust height if needed */
+  border: none;
+  z-index: 1000;
 }

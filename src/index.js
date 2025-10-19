@@ -119,7 +119,7 @@ async function displayArtistSongs(songs) {
   const topTracks = songs
     .map(
       (song) => `
-<div>
+<div class="songs" data-id="${song.id}">
 <h3>${song.name}</h3>
 <span>${song.artists.map((artist) => artist.name).join(", ")}</span>
 </div>
@@ -139,7 +139,11 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   const options = {
     uri: "spotify:episode:7makk4oTQel546B0PZlDM5",
   };
-  const callback = (EmbedController) => {};
+  const callback = (EmbedController) => {
+    document
+      .querySelectorAll(".songs")
+      .forEach((song) => song.addEventListener("click"));
+  };
 
   IFrameAPI.createController(element, options, callback);
 };

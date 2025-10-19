@@ -119,34 +119,45 @@ async function displayArtistSongs(songs) {
   const topTracks = songs
     .map(
       (song) => `
-<div class="songs" data-id="${song.id}">
+<button class="songs" data-id="${song.uri}">
 <h3>${song.name}</h3>
 <span>${song.artists.map((artist) => artist.name).join(", ")}</span>
-</div>
+</button>
 
 `
     )
     .join("");
 
   songsSectionEl.innerHTML = topTracks;
+  songListeners();
 }
 
 // spotify iframe Api
+
+let embedController;
 
 // This signals to your app that it is now safe to rely on the methods of the iFrame API.
 window.onSpotifyIframeApiReady = (IFrameAPI) => {
   const element = document.getElementById("embed-iframe");
   const options = {
+    // default track
     uri: "spotify:track:7H7hgeZJkbpWTpxuAqzhv1",
   };
-  const callback = (EmbedController) => {
-    document.querySelectorAll(".songs").forEach((song) =>
-      song.addEventListener("click", () => {
-        // use the iFrame API's loadUri method to tell the Embed to load the episode that has been clicked on.
-        EmbedController.loadUri(song.dataset.id);
-      })
-    );
+  const callback = (controller) => {
+    embedController = controller;
+    songListeners();
   };
 
   IFrameAPI.createController(element, options, callback);
 };
+
+function songListeners() {
+  document.querySelectorAll(".songs").forEach((song) =>
+    song.addEventListener("click", () => {
+      if (!embedController) return;
+
+      // use the iFrame API's loadUri method to tell the Embed to load the episode that has been clicked on.
+      embedController.loadUri(song.dataset.id);
+    })
+  );
+}

@@ -137,12 +137,15 @@ async function displayArtistSongs(songs) {
 window.onSpotifyIframeApiReady = (IFrameAPI) => {
   const element = document.getElementById("embed-iframe");
   const options = {
-    uri: "spotify:episode:7makk4oTQel546B0PZlDM5",
+    uri: "spotify:track:7H7hgeZJkbpWTpxuAqzhv1",
   };
   const callback = (EmbedController) => {
-    document
-      .querySelectorAll(".songs")
-      .forEach((song) => song.addEventListener("click"));
+    document.querySelectorAll(".songs").forEach((song) =>
+      song.addEventListener("click", () => {
+        // use the iFrame API's loadUri method to tell the Embed to load the episode that has been clicked on.
+        EmbedController.loadUri(song.dataset.id);
+      })
+    );
   };
 
   IFrameAPI.createController(element, options, callback);

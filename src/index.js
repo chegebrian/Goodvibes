@@ -72,8 +72,8 @@ async function displayArtist(artists) {
     const arrayofArtists = artists
       .map(
         (artist) => `
-      <div class="artist-card" data-id="${artist.id}" width="160px">
-      <img src=${artist.images[0]?.url} alt=${artist.name} width="100%">
+      <div class="artist-card" data-id="${artist.id}" >
+      <img src=${artist.images[0]?.url} alt=${artist.name}>
       <div>
         <span></span>
         <h3>${artist.name}</h3>
@@ -121,8 +121,12 @@ async function displayArtistSongs(songs) {
     .map(
       (song) => `
 <button class="songs" data-id="${song.uri}">
+<img src="${song.album.images[0]?.url}" alt="album-img"/>
+<div>
 <h3>${song.name}</h3>
 <span>${song.artists.map((artist) => artist.name).join(", ")}</span>
+
+</div>
 </button>
 
 `
@@ -142,7 +146,7 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   const element = document.getElementById("embed-iframe");
   const options = {
     // default track
-    height: "200px",
+    height: "150px",
     uri: "spotify:track:7H7hgeZJkbpWTpxuAqzhv1",
   };
   const callback = (controller) => {

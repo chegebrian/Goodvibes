@@ -7,74 +7,26 @@
     <link rel="stylesheet" href="./src/style.css" />
     <script type="module" src="./src/index.js" defer></script>
     <title>goodvibes</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      header {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      header img {
-        width: 3rem;
-      }
-      .input {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        padding: 0.24rem 0.5rem;
-        background-color: #181818;
-        border-radius: 0.25rem;
-      }
-      .input input {
-        border: none;
-        outline: none;
-        padding: 0.5rem 1rem;
-        background-color: #181818;
-        color: #b3b3b3;
-        width: 100%;
-      }
-      .input input::placeholder {
-        color: #b3b3b3;
-      }
-      .input button {
-        background-color: #1db954;
-        border-radius: 0.25rem;
-        padding: 0.5rem 1rem;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        color: #fff;
-      }
-      main {
-        /* width: fit-content; */
-        /* height: 100vh; */
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        gap: 1em;
-      }
 
-      #songs-section {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1em;
-      }
-
-      #artists-section {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 1em;
-      }
-    </style>
   </head>
   <body>
     <header>
-      <img src="./public/images/headphones-solid-full.svg" alt="headphones" />
-      <h1>GoodVibes</h1>
+      <div>
+        <img src="./public/images/headphones-solid-full.svg" alt="headphones" />
+        <h1>GoodVibes</h1>
+      </div>
+      <form action="">
+        <div class="input">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Who do you want to listen to?"
+            required
+          />
+          <button type="submit">Search</button>
+        </div>
+      </form>
     </header>
     <main>
       <section>
@@ -82,18 +34,7 @@
         <div id="songs-section"></div>
       </section>
       <section>
-        <form action="">
-          <div class="input">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Who do you want to listen to?"
-              required
-            />
-            <button type="submit">Search</button>
-          </div>
-        </form>
+        <h2>Artists</h2>
         <div id="artists-section"></div>
       </section>
     </main>

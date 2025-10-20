@@ -1,14 +1,21 @@
+// Spotify credentials
 const clientID = import.meta.env.VITE_CLIENT_ID;
 const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
+
+// Spotify api endpoints
 const tokenEndpointUrl = "https://accounts.spotify.com/api/token";
 const artistEndpointUrl = "https://api.spotify.com/v1/artists";
 const searchEndpointUrl = "https://api.spotify.com/v1/search";
 const trackEndpointUrl = "https://api.spotify.com/v1/tracks";
 
+// Dom elements
 const formEl = document.querySelector("form");
 const artistsSectionEl = document.querySelector("#artists-section");
 const songsSectionEl = document.querySelector("#songs-section");
-
+const inputEl = document.querySelector(".input");
+inputEl.addEventListener("mouseover", () => inputEl.classList.add("focus"));
+inputEl.addEventListener("mouseout", () => inputEl.classList.remove("focus"));
+// numberformat converter
 const formatter = new Intl.NumberFormat("en-US");
 
 // function to get our access token for authorization
@@ -33,6 +40,8 @@ async function fetchAccessToken() {
     console.error(error);
   }
 }
+
+// this function returns only artists not songs
 
 async function fetchArtist(userInput) {
   // userInput = "nina simone";
@@ -64,6 +73,8 @@ formEl.addEventListener("submit", async (e) => {
 
   await fetchArtist(userInput);
 });
+
+// after retrieving artists data we loop and render it.
 
 async function displayArtist(artists) {
   console.log(artists);
@@ -100,6 +111,8 @@ async function displayArtist(artists) {
   }
 }
 
+// we get the artist id so we can use it to get the artist's top tracks
+
 async function fetchSpecificArtist(id) {
   const accessToken = await fetchAccessToken();
   try {
@@ -115,6 +128,7 @@ async function fetchSpecificArtist(id) {
   }
 }
 
+// we display the artists top tracks
 async function displayArtistSongs(songs) {
   console.log(songs);
   const topTracks = songs

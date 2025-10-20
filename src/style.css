@@ -29,6 +29,7 @@ header div {
   padding: 0.24rem 0.5rem;
   background-color: #181818;
   border-radius: 0.25rem;
+  /* border:1px solid #1db954 */
 }
 
 .input input {
@@ -52,6 +53,11 @@ header div {
   cursor: pointer;
   color: #fff;
 }
+
+.focus{
+  border: 1px solid #1db954;
+}
+
 main {
   /* width: fit-content; */
   /* height: 100vh; */
@@ -105,17 +111,6 @@ ul li {
   width: 100%;
   border-radius: 0.5rem;
 }
-
-/* | Purpose                         | Color         | Hex       | Notes                                               |
-| ------------------------------- | ------------- | --------- | --------------------------------------------------- |
-| **Primary brand color**         | Spotify Green | `#1DB954` | Used for highlights, active links, and play buttons |
-| **Background (main)**           | Jet Black     | `#121212` | Primary app background (Spotify-style dark theme)   |
-| **Sidebar background**          | Pure Black    | `#000000` | Provides contrast for logo and nav links            |
-| **Card / Section background**   | Charcoal      | `#181818` | For song cards and "Now Playing" section            |
-| **Hover / Active color**        | Graphite Gray | `#282828` | Used when hovering over songs or nav items          |
-| **Primary text**                | White         | `#FFFFFF` | Main text color                                     |
-| **Secondary text**              | Muted Gray    | `#B3B3B3` | Artist names, descriptions, secondary info          |
-| **Border / Divider (optional)** | Soft Gray     | `#2A2A2A` | Subtle separators between UI areas                  | */
 
 footer {
   position: fixed;

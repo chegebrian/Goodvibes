@@ -6,11 +6,11 @@ Goodvibes is a modern, responsive music streaming web application that integrate
 
 ## 🚀 Features
 
-- 🎧 Play and preview songs using the Spotify API  
-- 🔍 Search for artists, albums, and tracks  
-- 📱 Responsive design for both desktop and mobile  
-- 🎨 Modern and vibrant UI with smooth animations  
-- 💾 Environment variable support via `.env` file  
+- 🎧 Play and preview songs using the Spotify API
+- 🔍 Search for artists, albums, and tracks
+- 📱 Responsive design for both desktop and mobile
+- 🎨 Modern and vibrant UI with smooth animations
+- 💾 Environment variable support via `.env` file
 - ⚡ Fast and lightweight — built with vanilla JS and CSS
 
 ---
@@ -44,28 +44,52 @@ Goodvibes/
 ## ⚙️ Installation & Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/chegebrian/Goodvibes.git
    cd Goodvibes
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
    Create a `.env` file in the root folder with your Spotify credentials:
-   ```bash
-   CLIENT_ID=your_spotify_client_id
-   CLIENT_SECRET=your_spotify_client_secret
+
+   🧩 1. Create a Spotify Developer Account
+
+   Go to the Spotify Developer Dashboard - https://developer.spotify.com/dashboard
+   .
+
+   Log in with your Spotify account.
+
+   Click “Create an App” → Give it a name (e.g., Goodvibes).
+
+   Copy the following from the app page:
+
+   Client ID
+
+   Client Secret
+
+   Since the project is created with vite we'll append VITE before the client id and client secret variable so we can be able to access the credentials on our javascript file
+
+   Write the below lines on the .env file
+
    ```
+   VITE_CLIENT_ID=your_spotify_client_id
+   VITE_CLIENT_SECRET=your_spotify_client_secret
+   ```
+
+    please note the credentials are sensitive data, include the .env file in the gitignore file to avoid it being pushed to github.
 
 4. **Run the app**
    ```bash
    npm run dev
    ```
-  
+
 ---
 
 ## 🧠 Future Improvements
